@@ -1,29 +1,21 @@
-from flask import Flask, render_template
-import datetime
+from flask import Flask, render_template, request, jsonify
 import requests
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    # Get current time and date
-    current_time = datetime.datetime.now().strftime('%H:%M:%S')
-    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
-    
-    # Stock market timings (for example, NYSE)
-    market_open = "09:30"
-    market_close = "16:00"
+    stock_info = ''
+    if request.method == 'POST':
+        api_key = request.form['api_key']
+        ticker_symbol = request.form['ticker_symbol']
+        # Here you'd add the logic to fetch stock data using the provided API key and ticker symbol.
+        # For example, using requests.get() to call an API endpoint.
+        # stock_info = requests.get(f"API_ENDPOINT?symbol={ticker_symbol}&apikey={api_key}")
+        # For demonstration, we'll just simulate a response.
+        stock_info = f"Stock data for {ticker_symbol} with API key {api_key}"
 
-    # Placeholder for live stock prices (replace with API call)
-    stock_prices = {
-        'PLTR': "Get PLTR price from API",
-        'MSFT': "Get MSFT price from API"
-    }
+    return render_template('index.html', stock_info=stock_info)
 
-    # Render the web page with the above information
-    return render_template('index.html', current_time=current_time, 
-                           current_date=current_date, market_open=market_open, 
-                           market_close=market_close, stock_prices=stock_prices)
-
-app.run(host='0.0.0.0', port=5000)
-
+if __name__ == '__main__':
+    app.run(debug=True)

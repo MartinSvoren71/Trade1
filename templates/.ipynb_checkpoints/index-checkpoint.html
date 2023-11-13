@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Information App</title>
+</head>
+<body>
+    <h1>Stock Information App</h1>
+    <form method="post">
+        <label for="api_key">API Key:</label>
+        <input type="text" id="api_key" name="api_key" required>
+        <label for="ticker_symbol">Ticker Symbol:</label>
+        <input type="text" id="ticker_symbol" name="ticker_symbol" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+        <p>Stock Information:</p>
+        <pre>{{ stock_info }}</pre>
+    </div>
+</body>
+</html>
