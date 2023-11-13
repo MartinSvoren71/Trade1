@@ -25,5 +25,5 @@ def index():
                            current_date=current_date, market_open=market_open, 
                            market_close=market_close, stock_prices=stock_prices)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(host='0.0.0.0', port=5000)
+
